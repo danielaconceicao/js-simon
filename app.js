@@ -9,13 +9,12 @@ const numbers = [];
 let spaceTime = document.querySelector('.space-time');
 const btn = document.querySelector('.btn-timer');
 const spaceForm = document.querySelector('.space-form');
+const formEl = document.querySelector('.form');
 
 
 /**
- * 
  *@param {number} max 
  *@param {number} min 
- *
  *  */
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
@@ -23,10 +22,8 @@ function getRndInteger(min, max) {
 
 
 /**
- * 
  *@param {number} max 
  *@param {number} min 
- *
  *  */
 function getRandomNumber(min, max) {
     for (let i = 0; i < 5; i++) {
@@ -36,9 +33,7 @@ function getRandomNumber(min, max) {
 }
 
 /** 
- * 
  * @param {Array} arr 
- * 
  */
 function genereteNumbersMarkup(arr) {
     `<span>${arr[0]}</span>
@@ -63,21 +58,60 @@ btn.addEventListener('click', () => {
         spaceTime.textContent = seconds;
         ++clockCounter;
         if (clockCounter > 2 + 1) {
-            hideNumber();
-            showForm();
-            spaceTime.textContent = 'Tempo esgotado';
             clearInterval(getTimer);
+            hideNumber();
+            spaceTime.textContent = "il tempo è scaduto, inserisci i numeri nell'input";
+            showForm();
+            btn.classList.toggle('d-none');
+
         }
     }, 1000)
 });
+
+//Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
+formEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+    //console.log('fuiclicado')
+
+    const firstNumberEl = document.querySelector('.firstNumber').value;
+    const secondNumberEl = document.querySelector('.secondNumber').value;
+    const thirdNumberEl = document.querySelector('.thirdNumber').value;
+    const fourthNumberEl = document.querySelector('.fourthNumber').value;
+    const lastNumberEl = document.querySelector('.LastNumber').value;
+
+    const userNumbers = [firstNumberEl, secondNumberEl, thirdNumberEl, fourthNumberEl, lastNumberEl];
+    //console.log(usernumbers);
+
+    const correctNumbers = [];
+    const wrongNumbers = [];
+
+    for (let i = 0; i < numbers.length; i++) {
+
+        if (userNumbers[i] === numbers[i]) {
+            correctNumbers.push(userNumbers[i]);
+            
+        }else{
+            wrongNumbers.push(userNumbers[i]);
+        } 
+    }
+    console.log(`numeros corretos`, correctNumbers);
+    console.log(`numeros incorretos`, wrongNumbers);
+});
+
+
+
 
 function hideNumber() {
     return casualNumbers.classList.toggle('d-none');
 }
 
-function showForm(){
-    return spaceForm.classList.toggle('d-block')
+function showForm() {
+    return spaceForm.classList.toggle('d-block');
 }
+
+console.log(numbers);
+
+
 
 
 

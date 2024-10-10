@@ -1,16 +1,32 @@
-/* Visualizzare in pagina 5 numeri casuali.
+/*
 Da lì parte un timer di 30 secondi.
 Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
 Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati. */
 
+//Visualizzare in pagina 5 numeri casuali.
 const casualNumbers = document.querySelector('.number');
 const numbers = [];
+let timer = document.querySelector('.timer');
+const btn = document.querySelector('.btn-timer');
 
 
+/**
+ * 
+ *@param {number} max 
+ *@param {number} min 
+ *
+ *  */  
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+
+/**
+ * 
+ *@param {number} max 
+ *@param {number} min 
+ *
+ *  */  
 function getRandomNumber(min, max) {
     for (let i = 0; i < 5; i++) {
         numbers.push(getRndInteger(min, max))
@@ -18,6 +34,11 @@ function getRandomNumber(min, max) {
     return numbers
 }
 
+/** 
+ * 
+ * @param {Array} arr 
+ * 
+ */
 function genereteNumbersMarkup(arr) {
     `<span>${arr[0]}</span>
      <span>${arr[1]}</span>
@@ -27,8 +48,11 @@ function genereteNumbersMarkup(arr) {
 }
 
 let generatedNumber = genereteNumbersMarkup(numbers);
-console.log(generatedNumber);
 
 casualNumbers.insertAdjacentHTML('beforeend', generatedNumber);
+casualNumbers.innerHTML = getRandomNumber(1, 100);
 
-casualNumbers.innerHTML = getRandomNumber(1, 50);
+btn.addEventListener('click', () => {
+    setTimeout(myFunction, 3000);
+});
+

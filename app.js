@@ -1,10 +1,5 @@
-/*
-
-Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
-Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati. */
-
 //Visualizzare in pagina 5 numeri casuali.
-const casualNumbers = document.querySelector('.number');
+const spaceCasualNumbers = document.querySelector('.number');
 const numbers = [];
 let spaceTime = document.querySelector('.space-time');
 const btn = document.querySelector('.btn-timer');
@@ -45,8 +40,8 @@ function genereteNumbersMarkup(arr) {
 
 let generatedNumber = genereteNumbersMarkup(numbers);
 
-casualNumbers.insertAdjacentHTML('beforeend', generatedNumber);
-casualNumbers.innerHTML = getRandomNumber(1, 100);
+spaceCasualNumbers.insertAdjacentHTML('beforeend', generatedNumber);
+spaceCasualNumbers.innerHTML = getRandomNumber(1, 100);
 
 //Da lì parte un timer di 30 secondi.
 btn.addEventListener('click', () => {
@@ -61,9 +56,8 @@ btn.addEventListener('click', () => {
             clearInterval(getTimer);
             hideNumber();
             spaceTime.textContent = "il tempo è scaduto, inserisci i numeri nell'input";
-            showForm();
+            showHideForm();
             btn.classList.toggle('d-none');
-
         }
     }, 1000)
 });
@@ -71,16 +65,13 @@ btn.addEventListener('click', () => {
 //Dopo 30 secondi i numeri scompaiono e appaiono invece 5 input in cui l'utente deve inserire i numeri che ha visto precedentemente, nell'ordine che preferisce.
 formEl.addEventListener('submit', (e) => {
     e.preventDefault();
-    //console.log('fuiclicado')
 
-    const firstNumberEl = document.querySelector('.firstNumber').value;
-    const secondNumberEl = document.querySelector('.secondNumber').value;
-    const thirdNumberEl = document.querySelector('.thirdNumber').value;
-    const fourthNumberEl = document.querySelector('.fourthNumber').value;
-    const lastNumberEl = document.querySelector('.LastNumber').value;
+    const inputs = document.querySelectorAll('.firstNumber, .secondNumber, .thirdNumber, .fourthNumber, .LastNumber');
+    const userNumbers = [];
 
-    const userNumbers = [firstNumberEl, secondNumberEl, thirdNumberEl, fourthNumberEl, lastNumberEl];
-    //console.log(usernumbers);
+    for (let i = 0; i < inputs.length; i++) {
+        userNumbers.push(Number(inputs[i].value));
+    }
 
     const correctNumbers = [];
     const wrongNumbers = [];
@@ -94,22 +85,35 @@ formEl.addEventListener('submit', (e) => {
             wrongNumbers.push(userNumbers[i]);
         } 
     }
-    console.log(`numeros corretos`, correctNumbers);
-    console.log(`numeros incorretos`, wrongNumbers);
+    showHideForm();
+    hideNumber();
+
+    //Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
+    let number = correctNumbers.length <= 0 ? 'numero' : 'numeri';
+
+    if (correctNumbers) {
+        spaceTime.textContent = `Ti sei ricordato, ${correctNumbers.length} ${number} ${correctNumbers}`
+    }
+    //console.log(`numeros corretos`, correctNumbers);
+    //console.log(`numeros incorretos`, wrongNumbers);
 });
 
 
 
 
 function hideNumber() {
-    return casualNumbers.classList.toggle('d-none');
+    if (spaceCasualNumbers){
+        document.querySelector('.number').innerHTML = '';
+    }
 }
 
-function showForm() {
-    return spaceForm.classList.toggle('d-block');
+function showHideForm() {
+    if (spaceForm.classList.contains('d-none')) {
+        spaceForm.classList.replace('d-none', 'd-block');
+    }else {
+        spaceForm.classList.replace('d-block', 'd-none');
+    }
 }
-
-console.log(numbers);
 
 
 

@@ -17,36 +17,48 @@
 </head>
 
 <body>
-    <section class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;"">
-        <div class="number d-flex" style="height: 10%;"></div>
-        <div class="pb-5 d-none space-form">
-            <form class="d-flex flex-column form">
-                <div class="col mx-3">
-                    <input type="text" class="form-control firstNumber" placeholder="First number" aria-label="First name"
-                        name="FirstNumber">
-                </div>
-                <div class="col mx-3">
-                    <input type="text" class="form-control secondNumber" placeholder="second number" aria-label="second number"
-                        name="secondNumber">
-                </div>
-                <div class="col mx-3">
-                    <input type="text" class="form-control thirdNumber" placeholder="third number" aria-label="Last name"
-                        name="thirdNumber">
-                </div>
-                <div class="col mx-3">
-                    <input type="text" class="form-control fourthNumber" placeholder="fourth number" aria-label="Last name"
-                        name="fourthNumber">
-                </div>
-                <div class="col mx-3">
-                    <input type="text" class="form-control LastNumber" placeholder="Last number" aria-label="Last name"
-                        name="LastNumber">
-                </div>
-                <div class="text-center pt-4 d-block col-12"><button type="submit">Controlla il numero</button></div>
-            </form>
+    <main>
+        <div class="container">
+         
+             <h1 class="display-random-number text-center align-middle"></h1>
+            
+            <section class="d-none space-form" style="height: 100vh;"">
+                <h2>What numbers do you remember?</h2>
+                <p>The order doesn't matter!</p>
+
+                <form>
+                    <div class="mb-3"
+                        <label for="FirstNumber" class="form-label">Number 1</label>
+                        <input type="number" class="form-control firstNumber" placeholder="First number" aria-label="First name" name="FirstNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="secondNumber" class="form-label">Number 2</label>
+                        <input type="text" class="form-control secondNumber" placeholder="second number"aria-label="second number" name="secondNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="FirstNumber" class="form-label">Number 3</label>
+                        <input type="text" class="form-control thirdNumber" placeholder="third number" aria-label="Last name" name="thirdNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fourthNumber" class="form-label">Number 4</label>
+                        <input type="text" class="form-control fourthNumber" placeholder="fourth number" aria-label="Last name" name="fourthNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="LastNumber" class="form-label">Number 5</label>
+                        <input type="text" class="form-control LastNumber" placeholder="Last number" aria-label="Last name" name="LastNumber">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </form>
+            </section>
         </div>
-        <div class="space-time"></div>
-        <div><button class="btn-timer">Avvia il timer</button></div>
-    </section>
+    </main>
     <script src="app.js"></script>
 </body>
 
